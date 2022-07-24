@@ -1,0 +1,27 @@
+FROM openjdk:8-jre-alpine
+
+RUN set -x \
+ && apk add --no-cache  \
+ && apk upgrade \
+ && apk add --no-cache curl
+
+ARG ENABLE_JACOCO=false
+ARG version=x.x.x
+
+EXPOSE 8180
+
+COPY /build/libs/pricing-api-${version}.jar ekaPricing.jar
+
+ENV jacoco_version 0.8.3
+
+RUN if [ "$ENABLE_JACOCO" = true ]; then \
+	curl -f https://repo1.maven.org/maven2/org/jacoco/jacoco/$jacoco_version/jacoco-$jacoco_version.zip -o jacoco.zip && \
+		sum=$(cat jacoco.zip | md5sum | cut -d ' ' -f 1) && \
+		echo $sum && \
+		if [ ! $sum == $md5 ]; then exit 1; fi && \
+		mkdir /jacoco && \
+		unzip jacoco.zip -d /jacoco && \
+		rm jacoco.zip; \
+	fi
+
+ENTRYPOINT ["java", "-jar","ekaPricing.jar"]

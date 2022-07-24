@@ -1,0 +1,35 @@
+{"_id":{"$oid":"5c1a430891dafc3f647ba54b"},"id":"Settlement Price","value":"Settlement Price","objectName":"priceType","appName":"mdm"}
+{"_id":{"$oid":"5c1a431e91dafc3f647ba54c"},"id":"Open Price","value":"Open Price","objectName":"priceType","appName":"mdm"}
+{"_id":{"$oid":"5c1a432891dafc3f647ba54d"},"id":"Close Price","value":"Close Price","objectName":"priceType","appName":"mdm"}
+{"_id":{"$oid":"5c1a432e91dafc3f647ba54e"},"id":"Ask Price","value":"Ask Price","objectName":"priceType","appName":"mdm"}
+{"_id":{"$oid":"5c1a433491dafc3f647ba54f"},"id":"Bid Price","value":"Bid Price","objectName":"priceType","appName":"mdm"}
+{"_id":{"$oid":"5c1a433b91dafc3f647ba550"},"id":"High Price","value":"High Price","objectName":"priceType","appName":"mdm"}
+{"_id":{"$oid":"5c1a434491dafc3f647ba551"},"id":"Low Price","value":"Low Price","objectName":"priceType","appName":"mdm"}
+{"_id":{"$oid":"5c1a434891dafc3f647ba552"},"id":"Average","value":"Average","objectName":"priceType","appName":"mdm"}
+{"_id":{"$oid":"5c1a435691dafc3f647ba553"},"id":"Spot","value":"Spot","objectName":"pricePoint","appName":"mdm"}
+{"_id":{"$oid":"5c1a439891dafc3f647ba558"},"id":"ID_Contract Period Average","value":"Contract Period Average","objectName":"priceQuoteRule","appName":"mdm"}
+{"_id":{"$oid":"5c1a43aa91dafc3f647ba55a"},"id":"ID_Custom Period Average","value":"Custom Period Average","objectName":"priceQuoteRule","appName":"mdm"}
+{"_id":{"$oid":"5c1b5fa43771860bef69e0d9"},"id":"ID_Prior Business Day","value":"Prior Business Day","objectName":"holidayRule","appName":"mdm"}
+{"_id":{"$oid":"5c1b5fd13771860bef69e15b"},"id":"ID_Next Business Day","value":"Next Business Day","objectName":"holidayRule","appName":"mdm"}
+{"_id":{"$oid":"5c1b5fe53771860bef69e19d"},"id":"ID_Prior Unique Business Day","value":"Prior Unique Business Day","objectName":"holidayRule","appName":"mdm"}
+{"_id":{"$oid":"5c1b5ffa3771860bef69e1cd"},"id":"ID_Next Unique Business Day","value":"Next Unique Business Day","objectName":"holidayRule","appName":"mdm"}
+{"_id":{"$oid":"5c1b60343771860bef69e271"},"id":"ID_ Closest Unique Business Day/Forward","value":" Closest Unique Business Day/Forward","objectName":"holidayRule","appName":"mdm"}
+{"_id":{"$oid":"5c1b60413771860bef69e296"},"id":"ID_Closest Business Day/Forwards","value":"Closest Business Day/Forwards","objectName":"holidayRule","appName":"mdm"}
+{"_id":{"$oid":"5c1b81b73771860bef6a4332"},"id":"ID_Delivery Period","value":"Delivery Period","objectName":"period","appName":"mdm"}
+{"_id":{"$oid":"5c1b8e3b3771860bef6a6b1a"},"id":"ID_Bill of Lading","value":"Bill of Lading","objectName":"event","appName":"mdm"}
+{"_id":{"$oid":"5c1b8e543771860bef6a6b74"},"id":"ID Notice of Readiness","value":" Notice of Readiness","objectName":"event","appName":"mdm"}
+{"_id":{"$oid":"5c1b8e703771860bef6a6bc8"},"id":"ID_Week of BL","value":"Week of BL","objectName":"event","appName":"mdm"}
+{"_id":{"$oid":"5c2478b9d38534784f08b237"},"id":"ID_Closest Business Day/Backwards","value":"Closest Business Day/Backwards","objectName":"holidayRule","appName":"mdm"}
+{"_id":{"$oid":"5c247906d38534784f08b2cc"},"id":"ID_ Closest Unique Business Day/Backwards","value":" Closest Unique Business Day/Backwards","objectName":"holidayRule","appName":"mdm"}
+{"_id":{"$oid":"5c247949d38534784f08b35a"},"id":"ID_Ignore","value":"Ignore","objectName":"holidayRule","appName":"mdm"}
+{"_id":{"$oid":"5c2c5f79d38534784f110a16"},"id":"Forward","value":"Forward","objectName":"pricePoint","appName":"mdm"}
+{"_id":{"$oid":"5c2dd2c7d38534784f1227f3"},"id":"M+1","value":"M+1","objectName":"quotedPeriod","appName":"mdm"}
+{"_id":{"$oid":"5c2dd2ead38534784f122818"},"id":"M+2","value":"M+2","objectName":"quotedPeriod","appName":"mdm"}
+{"_id":{"$oid":"5c2dd2fcd38534784f122828"},"id":"M+3","value":"M+3","objectName":"quotedPeriod","appName":"mdm"}
+{"_id":{"$oid":"5c2dd309d38534784f122836"},"id":"M+4","value":"M+4","objectName":"quotedPeriod","appName":"mdm"}
+{"_id":{"$oid":"5c2dd8c4d38534784f122d6f"},"id":"1st Nearby","value":"1st Nearby","objectName":"quotedPeriod","appName":"mdm"}
+{"_id":{"$oid":"5c2dd905d38534784f122da4"},"id":"2nd Nearby","value":"2nd Nearby","objectName":"quotedPeriod","appName":"mdm"}
+{"_id":{"$oid":"5c2dd910d38534784f122daf"},"id":"3rd Nearby","value":"3rd Nearby","objectName":"quotedPeriod","appName":"mdm"}
+{"_id":{"$oid":"5c2ddca6d38534784f1230c9"},"id":"Date","value":"Date","objectName":"quotedPeriod","appName":"mdm"}
+{"_id":{"$oid":"5c2de3d4d38534784f1238f7"},"id":"fixed","value":"Fixed","objectName":"fx","appName":"mdm"}
+{"_id":{"$oid":"5c32fdb4d38534784f16c0a2"},"id":"curve","value":"Curve","objectName":"fx","appName":"mdm"}

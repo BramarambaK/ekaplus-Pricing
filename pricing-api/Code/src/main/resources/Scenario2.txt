@@ -1,0 +1,60 @@
+{
+    "contract": {
+        "id": "999",
+        "contractItemList": [
+            {
+                "itemNo": "1",
+                "itemRefNo": "PCM-111",
+                "itemQtyUnit": "llb",
+                "deliveryFromDate": "2019-01-01",
+                "deliveryToDate": "2019-01-31",
+                "itemQty": "1000",
+                "pricing": {
+                    "pricingFormulaId": "123",
+                    "priceUnit": "USD"
+                }
+            },
+            {
+                "itemNo": "2",
+                "itemRefNo": "PCM-111",
+                "deliveryFromDate": "2019-01-01",
+                "deliveryToDate": "2019-01-31",
+                "itemQty": "1000",
+                "itemQtyUnit": "llb",
+                "pricing": {
+                    "pricingFormulaId": "123",
+                    "priceUnit": "USD"
+                }
+            }
+        ]
+    },
+    "formulaList": [
+        {
+            "id": "123",
+            "formulaExpression": "0.5*Platts Crude Oil Dated Brent+1.4*ICE Brent Crude Futures+10",
+            "pricePrecision": "2",
+            "curveList": [
+                {
+                    "curveName": "Platts Crude Oil Dated Brent",
+                    "priceType": "Ask Price",
+                    "pricePoint": "Spot",
+                    "priceQuoteRule": "Contract Period Average",
+                    "period": "Delivery Period",
+                    "fxType": "Fixed",
+                    "fxInput": "0.2"
+                },
+                {
+                    "curveID": "456",
+                    "curveName": "ICE Brent Crude Futures",
+                    "priceType": "Ask Price",
+                    "pricePoint": "Forward",
+                    "quotedPeriod": "Date",
+                    "quotedPeriodDate": "02-2019",
+                    "startDate": "1535308200000",
+                    "endDate": "1536517800000",
+                    "priceQuoteRule": "Custom Period Average"
+                }
+            ]
+        }
+    ]
+}

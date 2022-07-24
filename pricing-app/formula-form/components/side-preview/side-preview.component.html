@@ -1,0 +1,115 @@
+<ng-template #content let-c="close" let-d="dismiss" let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <div *ngIf="!loadingFlag && !errorstatus1">
+        <h6 class="modal-title final" id="modal-basic-title">Final Price</h6>
+        <div>
+          <font size="6"><b>{{
+             convertStrToFloat( sidePreviewData1.contract.itemDetails[itemNoDisplay].priceDetails
+                .contractPrice).toFixed(this.newCreateData.pricePrecision)
+            }}</b></font>
+          <span class="final">{{
+            sidePreviewData1.contract.itemDetails[itemNoDisplay].priceDetails
+              .priceUnit
+          }}</span>
+        </div>
+        <div>
+          {{
+            sidePreviewData1.contract.itemDetails[itemNoDisplay].priceDetails
+              .originalExpression
+          }}
+        </div>
+      </div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('closing preview')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div *ngIf="errorstatus1 && errorMessage && !loadingFlag">
+      <span style="color:red;padding:10px">Error-{{ errorMessage.error.message | json }}</span>
+    </div>
+    <div *ngIf="loadingFlag" class="loader "></div>
+    <div class="modal-body" *ngIf="!loadingFlag && !errorstatus1">
+      <div style="margin: 10px" *ngFor="
+          let x of sidePreviewData1.contract.itemDetails[0].priceDetails
+            .curveData;
+          index as j
+        ">
+        <button class="btn  dropdown-toggle border border-dark width1 text-align" type="dropdown" (click)="
+            sidePreviewData1.contract.itemDetails[
+              itemNoDisplay
+            ].priceDetails.curveData[j].collapse = !sidePreviewData1.contract
+              .itemDetails[itemNoDisplay].priceDetails.curveData[j].collapse
+          " [attr.aria-expanded]="
+            !sidePreviewData1.contract.itemDetails[itemNoDisplay].priceDetails
+              .curveData[j].collapse
+          " aria-controls="collapseExample">
+          <div class="display">
+          <div>
+          <span class="pricevalue" [ngStyle]="{ color: color[j] }">{{
+            x.curveName
+          }}</span>
+          <span class="pricevalue1 p-3">
+            <span>
+              {{
+                (sidePreviewData1.contract.itemDetails[itemNoDisplay]
+                  .priceDetails.curveData[j].curvePrice)
+              }}</span>
+            <span class="final pad1">{{
+              sidePreviewData1.contract.itemDetails[itemNoDisplay].priceDetails
+                .curveData[j].priceUnit
+            }}</span>
+          </span>
+        </div>
+        <div>
+          Average Fx : {{
+
+            getAvgFxValue(sidePreviewData1.contract.itemDetails[itemNoDisplay].priceDetails
+              .curveData[j])
+          }}
+        </div>
+      </div>
+        </button>
+        <div id="collapseExample" [ngbCollapse]="
+            sidePreviewData1.contract.itemDetails[itemNoDisplay].priceDetails
+              .curveData[j].collapse
+          ">
+          <div class="card">
+            <div class="card-body">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Price Def.</th>
+                    <th scope="col">Instr. Con. Month</th>
+                    <th scope="col">Fx Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="
+                      let y of sidePreviewData1.contract.itemDetails[
+                        itemNoDisplay
+                      ].priceDetails.curveData[j].data
+                    ">
+                    <td>{{ y.date | date: validFormatofdatepipe }}</td>
+                    <td>{{ convertStrToFloat(y.price) }}</td>
+                    <td >{{ getPriceDefinition(y.priceFlag) }}</td>
+                    <td *ngIf="y.instrumentMonth">{{ y.instrumentMonth }}</td>
+                    <td>{{ getFxValue(y.priceFx,sidePreviewData1.contract.itemDetails[itemNoDisplay].priceDetails.curveData[j]) }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<app-confirm-pricing-popup #confirm btn1="OK"></app-confirm-pricing-popup>
+
+<button class="btn greybutton" (click)="open(content)" [disabled]="!curveSelected">
+  PRICE PREVIEW
+</button>

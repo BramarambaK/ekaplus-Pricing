@@ -1,0 +1,286 @@
+<!-- <div>
+      <div class="margins">
+        <span class="heading pd5">Formula List</span>
+        <span *ngIf='fromPricing'> <a routerLink="/pricing/formula/create"><img class="pd5 pull-right mr5 cursor" src=".\assets\icons\Add.png" /></a>
+        </span>
+        <span *ngIf='!fromPricing'>
+          <img class="pd5 pull-right mr5 cursor" (click)=toggle() src=".\assets\icons\Add.png" />
+        </span>
+        <div class="searchContainer pull-right">
+  
+          <input [(ngModel)]="searchText" class="searchBox" type="search" name="search" placeholder="Search">
+          <img (click)="submitFilter()" class=" mr5 cursor searchIcon" src=".\assets\icons\Search.png" />
+  
+  
+        </div>
+      <input [(ngModel)]="searchText" class="pull-right" placeholder="search text goes here" /> -->
+<!-- <i class="material-icons pull-right mr5 cursor"> share </i> -->
+
+<!-- <button (click)="submitFilter()" class="search-button">Submit</button> -->
+<!-- </div>
+  <br /> -->
+<!-- <datatables [header]="filteredMeta" [data]="responseData"></datatables> -->
+
+<!-- <table class="table table-striped">
+        <thead>
+          <tr>
+            <th *ngFor="let item of (tableheadings | slice: 0:4) " ng-click="sortBy('name')">
+              {{ item[item.labelKey] }}
+              <span class="sortorder" ng-show="propertyName === 'name'" ng-class="{reverse: reverse}"></span>
+            </th>
+  
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="
+                let items of (responseData  | reverse
+                  | slice: pageSize
+                  | slice: 0:itemsPerPage 
+                  | filter: searchText);
+                let i = index
+              "
+            (click)="setFormulaDetail(items, i)" [class.highlighted]="i === selectedRow">
+            <td>{{ items.formulaName }}</td>
+            <td>{{ items.formulaExpression }}</td>
+            <td>{{ items.Type }}</td>
+            <td>{{ items.category }}</td>
+            <td>
+              <img (click)="edit(items)" *ngIf="!showActions" class=" mr5 cursor" src=".\assets\icons\Modify.png" />
+              <img (click)="copy(items)" *ngIf="!showActions" class=" mr5 cursor" src=".\assets\icons\Duplicate.png" />
+  
+              <img (click)="delete(items,deletemodal)" *ngIf="!showActions" class="mr5 cursor" src=".\assets\icons\Delete.png" />
+  
+              <div class="row" *ngIf="showActions">
+                <div class="col">
+                  <div ngbDropdown class="d-inline-block">
+  
+                    <i id="items" class="material-icons" ngbDropdownToggle>
+                      settings
+                    </i>
+                    <div ngbDropdownMenu aria-labelledby="items">
+                      <button class="dropdown-item">
+                        <img (click)="submitFilter()" *ngIf="showActions" class="cursor" src=".\assets\icons\Modify.png" />
+                        Edit
+                      </button>
+                      <button class="dropdown-item">
+                        <img (click)="submitFilter()" *ngIf="showActions" class="cursor" src=".\assets\icons\Duplicate.png" />Copy
+                      </button>
+                      <button class="dropdown-item">
+                        <img (click)="delete(items)" *ngIf="showActions" class="cursor" src=".\assets\icons\Delete.png" />
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table> -->
+
+<!-- <div>
+        <ngb-pagination [collectionSize]="responseData.length" #numPages [pageSize]="itemsPerPage" [(page)]="currentPage"
+          (pageChange)="onPageChange(currentPage)"></ngb-pagination>
+      </div> 
+    </div> -->
+
+<div [ngClass]="{ card: fromPricing }">
+  <div class="margins">
+    <!-- <span class="heading pd5">Formula List</span> -->
+
+    <span *ngIf="fromPricing">
+      <a routerLink="/pricing/formula/create"
+        ><img class="pd5 pull-right mr5 cursor" src=".\assets\icons\Add.png"
+      /></a>
+    </span>
+    <span *ngIf="!fromPricing">
+      <img
+        class="pd5 pull-right mr5 cursor"
+        (click)="clearBeforeToggle()"
+        src=".\assets\icons\Add.png"
+      />
+    </span>
+    <div class="searchContainer pull-right">
+      <input
+        type="text"
+        pInputText
+        size="50"
+        class="searchBox"
+        placeholder="Search"
+        (input)="dt.filterGlobal($event.target.value, 'contains')"
+        style="width:auto"
+      />
+      <img
+        (click)="submitFilter()"
+        class=" mr5 cursor searchIcon"
+        src=".\assets\icons\Search.png"
+      />
+    </div>
+  </div>
+
+  <p-table
+    #dt
+    [columns]="header"
+    [value]="records"
+    [paginator]="true"
+    [rows]="10"
+    sortMode="multiple"
+    [sortField]=""
+  >
+    <ng-template pTemplate="header" let-header>
+      <tr>
+        <th
+          [width]="h.width"
+          *ngFor="let h of header"
+          [pSortableColumn]="tableService.isSort(h) ? h.field : null"
+        >
+          {{ tableService.displayHeader(h) }}
+          <p-sortIcon
+            [field]="h.field"
+            *ngIf="tableService.isSort(h)"
+          ></p-sortIcon>
+        </th>
+        <th>
+          Actions
+        </th>
+      </tr>
+      <tr>
+        <th *ngFor="let h of headerKeys">
+          <p-multiSelect
+            *ngIf="tableService.isFilter(h)"
+            [options]="tableService.filter_distinct(records, h.field)"
+            defaultLabel="{{ tableService.displayHeader(h) }}"
+            (onChange)="dt.filter($event.value, h.field, 'in')"
+          ></p-multiSelect>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template
+      pTemplate="body"
+      let-record
+      let-columns="header"
+      let-rowIndex="rowIndex"
+    >
+      <tr [pSelectableRow]="record" [pSelectableRowIndex]="rowIndex">
+        <td class="new" *ngFor="let h of header">{{ record[h.field] }}</td>
+        <td>
+          <span
+            *ngIf="!showActions && !fromPricing"
+            class="popup-link"
+            (click)="selectedFormula(record)"
+            >Select</span
+          >
+          <img
+            (click)="edit(record)"
+            *ngIf="!showActions && fromPricing"
+            class=" mr5 cursor"
+            src=".\assets\icons\Modify.png"
+          />
+          <img
+            (click)="copy(record)"
+            *ngIf="!showActions && fromPricing"
+            class=" mr5 cursor"
+            src=".\assets\icons\Duplicate.png"
+          />
+
+          <img
+            (click)="delete(record, deletemodal)"
+            *ngIf="!showActions && fromPricing"
+            class="mr5 cursor"
+            src=".\assets\icons\Delete.png"
+          />
+          <div class="row" *ngIf="showActions">
+            <div class="col">
+              <div ngbDropdown class="d-inline-block">
+                <i id="items" class="material-icons" ngbDropdownToggle>
+                  settings
+                </i>
+                <div ngbDropdownMenu aria-labelledby="items">
+                  <button class="dropdown-item">
+                    <img
+                      (click)="edit(record, deletemodal)"
+                      *ngIf="showActions"
+                      class="cursor"
+                      src=".\assets\icons\Modify.png"
+                    />
+                    Edit
+                  </button>
+                  <button class="dropdown-item">
+                    <img
+                      (click)="copy(record)"
+                      *ngIf="showActions"
+                      class="cursor"
+                      src=".\assets\icons\Duplicate.png"
+                    />Copy
+                  </button>
+                  <button class="dropdown-item">
+                    <img
+                      (click)="delete(record, deletemodal)"
+                      *ngIf="showActions"
+                      class="cursor"
+                      src=".\assets\icons\Delete.png"
+                    />
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<div *ngIf="!fromPricing" class="d-flex justify-content-between py-2">
+  <button
+    class="btn btn-outline-dark"
+    (click)="outerModal.dismiss('formula list cancle')"
+  >
+    CANCEL
+  </button>
+  <!-- <button class="btn btn-success" (click)="useFormulaInContract()">
+    USE FORMULA
+  </button> -->
+</div>
+<app-confirm-pricing-popup #confirm btn1="OK"></app-confirm-pricing-popup>
+
+<!-- <ng-template #deletemodal let-modal>
+  <div class="modal-header">
+    <div class="modal-title" id="modal-basic-title">{{ title }}</div>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>{{ showMassage }} &hellip;</p>
+  </div>
+  <div class="modal-footer">
+    <span *ngIf="fromPricing">
+      <a routerLink="/pricing/formula/view">
+        <button
+          type="button"
+          class="btn btn-light"
+          (click)="modal.close('Close click')"
+        >
+          OK
+        </button></a
+      >
+    </span>
+    <span *ngIf="!fromPricing">
+      <button
+        class="btn btn-lg btn-outline-primary"
+        (click)="formulaSavedForContract(modal)"
+      >
+        OK
+      </button>
+    </span>
+  </div>
+</ng-template> -->

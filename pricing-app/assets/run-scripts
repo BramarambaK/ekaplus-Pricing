@@ -1,0 +1,4 @@
+mongoimport -d eka_connect_demo -c boliden_Meta --file C:\ConnectFinal\Eka-Connect\eka-connect-ui\src\app\views\Pricing\pricing\assets\pricing_meta.json
+mongoimport -d eka_connect_demo -c boliden_Data --file C:\ConnectFinal\Eka-Connect\eka-connect-ui\src\app\views\Pricing\pricing\assets\mdm_data.json
+mongoimport -d eka_connect_demo -c boliden_Data --file C:\ConnectFinal\Eka-Connect\eka-connect-ui\src\app\views\Pricing\pricing\assets\formula_data.json
+mongoimport -d eka_connect_demo -c boliden_Data --file C:\ConnectFinal\Eka-Connect\eka-connect-ui\src\app\views\Pricing\pricing\assets\curve_data.json

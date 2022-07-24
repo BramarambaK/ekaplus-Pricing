@@ -1,0 +1,153 @@
+{
+    "contract": {
+        "id": "999",
+        "asOfDate": "12-02-2018",
+        "itemDetails": [
+            {
+                "itemNo": "1",
+                "itemRefNo": "PCM-111",
+                "itemQtyUnit": "llb",
+                "deliveryFromDate": "2018-11-01",
+                "deliveryToDate": "2018-11-31",
+                "itemQty": "1000",
+                "pricing": {
+                    "pricingFormulaId": "456",
+                    "priceUnit": "USD"
+                },
+                "movement": [
+                    {
+                    	"movementQty": "200",
+                        "shipmentPeriodTo": "2018-10-10",
+                        "event": [
+                            {
+                                "name": "Bill Of Lading",
+                                "date": "2018-08-12"
+                            }
+                        ],
+                        "stockList": [
+                            {
+                            	
+                            	"stockRefNo": "ABC-1",
+                            	"stockQuantity": "100"
+                            },
+                            {
+                            	
+                            	"stockRefNo": "ABC-2",
+                            	"stockQuantity": "100"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "itemNo": "2",
+                "itemRefNo": "PCM-111",
+                "deliveryFromDate": "2019-02-01",
+                "deliveryToDate": "2019-02-28",
+                "itemQty": "1000",
+                "itemQtyUnit": "llb",
+                "pricing": {
+                    "pricingFormulaId": "456",
+                    "priceUnit": "USD"
+                }
+            }
+        ]
+    },
+    "formulaList": [
+        {
+            "id": "123",
+            "formulaExpression": "0.5*Platts Crude Oil Dated Brent+1.4*ICE Brent Crude Futures+10",
+            "pricePrecision": "2",
+            "curveList": [
+                {
+                    "curveName": "Platts Crude Oil Dated Brent",
+                    "priceType": "Ask Price",
+                    "pricePoint": "Spot",
+                    "priceQuoteRule": "Contract Period Average",
+                    "period": "Delivery Period",
+                    "fxType": "Fixed",
+                    "fxInput": "0.2"
+                },
+                {
+                    "curveID": "456",
+                    "curveName": "ICE Brent Crude Futures",
+                    "priceType": "Ask Price",
+                    "pricePoint": "Forward",
+                    "quotedPeriod": "Date",
+                    "fxType": "Fixed",
+                    "quotedPeriodDate": "02-2019",
+                    "startDate": "1535308200000",
+                    "endDate": "1536517800000",
+                    "priceQuoteRule": "Custom Period Average"
+                }
+            ],
+            "priceDifferential": [
+                {
+                    "differentialType": "S-Curve",
+                    "differentialValue": "",
+                    "differentialUnit": "",
+                    "diffLowerThreashold": "10",
+                    "diffUpperThreshold": "100"
+                }
+            ],
+            "triggerPriceEnabled": "false",
+            "triggerPricing": [
+                {
+                    "triggerDate": "06-02-2019",
+                    "quantity": "100",
+                    "price": "50"
+                }
+            ]
+        },
+        {
+            "id": "456",
+            "formulaExpression": "0.5*Platts Crude Oil Dated Brent+1.4*ICE Brent Crude+10",
+            "pricePrecision": "2",
+            "curveList": [
+                {
+                    "curveName": "Platts Crude Oil Dated Brent",
+                    "priceType": "Ask Price",
+                    "pricePoint": "Spot",
+                    "priceQuoteRule": "Event Offset Based",
+                    "event": "Bill Of Lading",
+                    "offsetType": "Day",
+                    "offset": "3-0-1",
+                    "fxType": "Fixed",
+                    "fxInput": "0.2"
+                },
+                {
+                    "curveID": "456",
+                    "curveName": "ICE Brent Crude",
+                    "priceType": "Ask Price",
+                    "pricePoint": "Spot",
+                    "quotedPeriod": "Date",
+                    "fxType": "Fixed",
+                    "quotedPeriodDate": "02-2019",
+                    "startDate": "1535308200000",
+                    "endDate": "1536517800000",
+                    "priceQuoteRule": "Lookback Pricing",
+                    "event": "Week of BL",
+                    "offsetType": "Month",
+                    "offset": "2-1-3"
+                }
+            ],
+            "priceDifferential": [
+                {
+                    "differentialType": "S-Curve",
+                    "differentialValue": "",
+                    "differentialUnit": "",
+                    "diffLowerThreashold": "10",
+                    "diffUpperThreshold": "200"
+                }
+            ],
+            "triggerPriceEnabled": "true",
+            "triggerPricing": [
+                {
+                    "triggerDate": "06-02-2019",
+                    "quantity": "90",
+                    "price": "40"
+                }
+            ]
+        }
+    ]
+} 

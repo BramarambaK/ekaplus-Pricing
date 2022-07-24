@@ -1,0 +1,442 @@
+{
+    "_id": "baseCurveDetails",
+    "data": [
+        {
+            "map": {
+                "curveName": "LBMA Gold"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "curveName": "LBMA Gold"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "curveName": "LBMA Gold"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "curveName": "LBMA Gold"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "curveName": "LBMA Gold"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Dec-2018",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Corn Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Dec-2017",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybean Meal Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Mar-2017",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "May-2017",
+                "priceSubType": "Forward",
+                "curveName": "KC HRW Wheat Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Sep-2016",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Chicago SRW Wheat Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Dec-2016",
+                "priceSubType": "Forward",
+                "curveName": "MGEX Hard Red Spring Wheat"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "May-2018",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Jul-2018",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Chicago SRW Wheat Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Sep-2017",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybean Meal Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Sep-2016",
+                "priceSubType": "Strike Price",
+                "curveName": "CBOT Corn Options"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Mar-2017",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Corn Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Sep-2016",
+                "priceSubType": "Strike Price",
+                "curveName": "CBOT Corn Options"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Aug-2016",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Aug-2016",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Sep-2016",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Jul-2016",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Aug-2016",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Sep-2016",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Jul-2016",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Aug-2016",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Sep-2016",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Nov-2016",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Nov-2016",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Dec-2018",
+                "priceSubType": "Forward",
+                "curveName": "MATIF Milling Wheat No 2 Commodity Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Dec-2018",
+                "priceSubType": "Forward",
+                "curveName": "MATIF Milling Wheat No 2 Commodity Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Dec-2018",
+                "priceSubType": "Forward",
+                "curveName": "MATIF Milling Wheat No 2 Commodity Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Dec-2018",
+                "priceSubType": "Forward",
+                "curveName": "MATIF Milling Wheat No 2 Commodity Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Dec-2018",
+                "priceSubType": "Forward",
+                "curveName": "MATIF Milling Wheat No 2 Commodity Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Sep-2018",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Sep-2016",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Sep-2017",
+                "priceSubType": "Forward",
+                "curveName": "KC HRW Wheat Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Nov-2018",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Sep-2016",
+                "priceSubType": "Strike Price",
+                "curveName": "CBOT Corn Options"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Jul-2016",
+                "priceSubType": "Strike Price",
+                "curveName": "CBOT Corn Options"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "May-2018",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Chicago SRW Wheat Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "May-2018",
+                "priceSubType": "Forward",
+                "curveName": "KC HRW Wheat Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Sep-2017",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Corn Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Jan-2017",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybean Meal Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Sep-2016",
+                "priceSubType": "Forward",
+                "curveName": "KC HRW Wheat Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Aug-2018",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybeans Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "May-2017",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Chicago SRW Wheat Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "May-2018",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Soybean Meal Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Dec-2016",
+                "priceSubType": "Forward",
+                "curveName": "KC HRW Wheat Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Jul-2016",
+                "priceSubType": "Forward",
+                "curveName": "CBOT Chicago SRW Wheat Futures"
+            },
+            "_class": "org.json.JSONObject"
+        },
+        {
+            "map": {
+                "pricePoint": "Forward",
+                "monthYear": "Dec-2016",
+                "priceSubType": "Strike Price",
+                "curveName": "CBOT Corn Options"
+            },
+            "_class": "org.json.JSONObject"
+        }
+    ],
+    "appName": "Pricing",
+    "objectName": "baseCurve"
+}

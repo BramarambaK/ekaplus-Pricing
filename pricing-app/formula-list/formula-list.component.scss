@@ -1,0 +1,86 @@
+.pull-right {
+  float: right;
+}
+.mr5 {
+  margin: 0px 5px;
+}
+.cursor {
+  cursor: pointer;
+}
+.mr {
+  margin: 20px;
+}
+
+.searchContainer {
+  display: inline-flex;
+  flex: 1 1 300px;
+  position: relative;
+  border-radius: 0px !important;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.searchIcon {
+  padding: 0.5rem;
+}
+
+.searchBox {
+  border: 0;
+  width: 157px !important;
+  padding-left: 6px;
+
+  flex: 1;
+}
+.pd5 {
+  padding-top: 5px;
+}
+.margins {
+  padding-top: 4px;
+  margin-bottom: 7px;
+  height: 33px;
+}
+.heading {
+  font-weight: 400;
+  font-size: 16px;
+}
+.cursor {
+  cursor: pointer;
+}
+input:focus {
+  outline: none;
+}
+.selected {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+.highlighted {
+  background-color: #9d9d9e !important;
+  color: #ffffff;
+}
+p-table {
+  margin-top: 11px;
+}
+
+.new {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.popup-link {
+  color: dodgerblue;
+  font-size: 14px;
+  padding-left: 4px;
+  cursor: pointer;
+}
+.pad {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.fixheight {
+  height: 30px;
+}
+body .ui-widget{
+  min-height: 115px;
+}

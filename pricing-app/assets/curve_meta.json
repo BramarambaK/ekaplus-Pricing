@@ -1,0 +1,70 @@
+{
+    "name": "Curve",
+    "label": "CURVE",
+    "type": "object",
+    "version": "3",
+    "tenantID": "something",
+    "createdOn": "Test",
+    "createdBy": "Test",
+    "lastModifiedOn": "Test",
+    "lastModifiedBy": "Test",
+    "versionHistory": [
+        {
+            "version": "1",
+            "fields": "[{}]",
+            "additionalProperties": {}
+        }
+    ],
+    "translatableKeys": [],
+    "fields": {
+        "curveName": {
+            "curveName": "Curve Name",
+            "labelKey": "curveName",
+            "type": "textbox",
+            "isRequired": "true",
+            "dataType": "String",
+            "length": "20"
+        },
+        "curveExpression": {
+            "curveExpression": "Curve Expression",
+            "labelKey": "curveExpression",
+            "type": "textbox",
+            "isRequired": "true",
+            "dataType": "String",
+            "length": "20"
+        },
+        "curveType": {
+            "curveType": "Curve Type",
+            "labelKey": "curveType",
+            "type": "textbox",
+            "isRequired": "true",
+            "dataType": "String",
+            "length": "20"
+        },
+        "includedCurve": {
+            "includedCurve": "Included Curves",
+            "labelKey": "includedCurve",
+            "type": "textbox",
+            "isRequired": "true",
+            "dataType": "String",
+            "length": "20"
+        },
+        "appName": {
+            "appName": "Type",
+            "labelKey": "appName",
+            "type": "textbox",
+            "isRequired": "true",
+            "dataType": "String",
+            "length": "20"
+        },
+        "objectName": {
+            "objectName": "Type",
+            "labelKey": "objectName",
+            "type": "textbox",
+            "isRequired": "true",
+            "dataType": "String",
+            "length": "10"
+        }
+    },
+    "additionalProperties": {}
+}

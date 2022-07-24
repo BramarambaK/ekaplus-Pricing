@@ -1,0 +1,83 @@
+.minWidth {
+  min-width: 50%;
+  display: flex;
+}
+.maxWidth {
+  max-width: 70%;
+  min-width: 70%;
+}
+
+.float {
+  float: right;
+}
+
+.margin {
+  margin: 3px 6px 0px 0px;
+}
+
+.mrtop {
+  margin-top: 20px;
+}
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.bordertop {
+  border-top: none;
+}
+.width {
+  width: 50%;
+  height: 26px;
+  border: 1px solid #cccccc;
+}
+
+.fontW {
+  font-weight: bold;
+}
+.marginForCurve {
+  margin: 15px 0px 15px 0px;
+}
+.flex1 {
+  flex: 0.75;
+}
+.flex3 {
+  flex: 2;
+}
+.flexFornewrow {
+  flex: 0.319;
+}
+.paddingicons {
+  padding: 5px 5px 5px 20px;
+}
+.tablemargin {
+  margin-bottom: 0px;
+}
+.paddingTh {
+  padding: 5px 0.75rem 5px 5px;
+}
+.paddingDisabled {
+  padding: 0.75rem 0px;
+}
+.FirstRowBGColor {
+  background-color: white;
+}
+.cardHeader {
+  border-bottom: 1px solid #c8ced3;
+}
+
+.cardbodypadding {
+  padding: 10px;
+}
+.paddingInput {
+  padding: 5px;
+}
+.borderColorForTable {
+  border-color: #ededed;
+}
+.table td {
+  border-top: 1px solid #ededed;
+  padding: 4px;
+}
+.wid{
+  width: 25%
+}

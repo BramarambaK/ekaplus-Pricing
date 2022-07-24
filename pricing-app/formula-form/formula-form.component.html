@@ -1,0 +1,993 @@
+<!-- <div
+  class="heading-container heading"
+  *ngIf="!indexPricing && !fromContractPopup && fromPricing"
+>
+  Formula Builder
+</div> -->
+<div [ngClass]="{ card: fromContractPopup === false }" *ngIf="curveDetailsMeta">
+  <div [ngClass]="{
+      'card-body': fromContractPopup === false,
+      fixedHeight: fromPricing === false
+    }">
+    <span>
+      <!-- <hr> -->
+    </span>
+
+    <span>
+      <form [formGroup]="formulacreateform">
+        <div class="form-group" *ngIf="!indexPricing">
+          <div class="row pad">
+            <div class="nopadding padr20">
+              <label for="exampleFormControlSelect1">{{
+                curveDetailsMeta.fields.formula_category[
+                  curveDetailsMeta.fields.formula_category.labelKey
+                ]
+              }}</label><br />
+              <select formControlName="category" class="form-control createcontrol padr20"
+                id="exampleFormControlSelect1" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
+                <option>Pricing</option>
+                <option>M2M</option>
+              </select>
+              <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+                <div *ngIf="f.category.errors.required">
+                  Category is required
+                </div>
+              </div>
+            </div>
+
+            <div class="nopadding padr20">
+              <label for="exampleInputEmail1">{{
+                  curveDetailsMeta.fields.formula_name[
+                    curveDetailsMeta.fields.formula_name.labelKey
+                  ]
+                }}
+                <span class="red">*</span></label><br />
+
+              <input id="name" name="name" type="text" formControlName="name" class="form-control createcontrol "
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }" required />
+              <!-- <div *ngIf="name.errors.minlength">
+                  Name must be at least 0 characters long.
+                </div> -->
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">
+                  Formula Name is required
+                </div>
+              </div>
+            </div>
+            <div class="nopadding padr20">
+              <label for="exampleFormControlSelect1" class="LabelExt">{{
+                curveDetailsMeta.fields.contractCurrencyPrice[
+                  curveDetailsMeta.fields.contractCurrencyPrice.labelKey
+                ]
+              }}</label>
+              <select formControlName="contractCurrencyPrice" class="form-control createcontrol wd100"
+                id="exampleFormControlSelect1" (change)="fxCheck()">
+                <option *ngFor="let items of mdmPriceUnit" [ngValue]="items.key">{{ items.value }}
+                </option>
+              </select>
+            </div>
+            <div class="row">
+              <div class="col-md-4 ">
+                <div class="form-group">
+                  <label for="form_name" class="LabelExt">{{
+                    curveDetailsMeta.fields.pricePrecision[
+                      curveDetailsMeta.fields.pricePrecision.labelKey
+                    ]
+                  }}</label>
+
+                  <!-- <input id="name" name="name" type="number" formControlName="pricePrecision" class="form-control createcontrol newinputstyle wd100" /> -->
+                  <select class="form-control createcontrol newinputstyle wd100" formControlName="pricePrecision">
+                    <option *ngFor="let items of digits" [ngValue]="items">{{
+                      items
+                    }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="form-group" *ngIf="!index">
+            <label for="exampleInputEmail1">{{curveDetailsMeta.fields.formula_type[curveDetailsMeta.fields.formula_type.labelKey]}}</label><br />
+            <div class="row pad">
+              <div class="mr30">
+                <div class="form-check">
+                  <input type="radio" class="form-check-input" id="materialUnchecked" name="materialExampleRadios"
+                    mdbInputDirective checked />
+                  <label class="form-check-label" for="materialUnchecked">Basic</label>
+                </div>
+              </div>
+    
+              <div>
+                <div class="form-check">
+                  <input type="radio" class="form-check-input" id="materialUnchecked" name="materialExampleRadios"
+                    mdbInputDirective />
+                  <label class="form-check-label" for="materialUnchecked">Advanced</label>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        <div class="formulaexp">
+          <label *ngIf="!indexPricing" for="exampleInputEmail1">{{
+            curveDetailsMeta.fields.formula_expression[
+              curveDetailsMeta.fields.formula_expression.labelKey
+            ]
+          }}</label><br />
+          <label *ngIf="indexPricing" for="exampleInputEmail1">Base Curve</label>
+
+          <!-- <input type="text" />
+    
+        <app-modal
+          (valueChange)="displayCount($event)"
+          *ngIf="!curveSelected"
+        ></app-modal> -->
+
+          <!-- {{curveData |json}} -->
+          <div class="mb-3 position-relative created col-md-4">
+            <div class="expName">
+              <div *ngIf="!showName">
+                {{ showCurvename }}
+              </div>
+            </div>
+
+            <!-- <div contenteditable="true" formControlName="expression" id="forlisting" list="listing" class="pd0 form-control h60 exp cursor"
+              placeholder="Type Expression" #box (focus)="showHideCurveDetails($event)" (focusout)="hideDropdown()"
+          aria-label="Recipient's
+          username"
+              aria-describedby="basic-addon2" autocomplete="off" required AutoSizeInput [minWidth]="350"
+              [maxWidth]="900">5*<div class="chip" contenteditable="false">
+                  <img src="img_avatar.png" alt="Person" width="96" height="96">
+                  John Doe
+                  <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+                </div><span contenteditable="true"></span> </div> -->
+
+            <tag-input formControlName="expression" placeholder="" secondaryPlaceholder="Type expression"
+              [modelAsStrings]="true" class="pd0 form-control h60 exp cursor" (onSelect)="handleTaginputChange($event)"
+              (onRemove)="removeFormulaArray($event)" (onTagEdited)="editTag($event)" [editable]="true"
+              [separatorKeyCodes]="[32, 13]" [allowDupes]="true" [ripple]="false" [disable]="showEdit || disableFormulaModification"
+              (onTextChange)="add1($event)" [onAdding]="onAdding" (onFocus)="showHideCurveDetails($event)"
+              (onBlur)="hideDropdown()" AutoSizeInput [minWidth]="800" [maxWidth]="800" [addOnBlur]="true">
+            </tag-input>
+            <!-- <input type="text" formControlName="expression" id="forlisting" list="listing" class="pd0 form-control h60 exp cursor"
+              placeholder="Type Expression" #box (focus)="showHideCurveDetails($event)" (focusout)="hideDropdown()"
+              (keyup)="add1(box.value)" (keydown.backspace)="delWholeExpression(box.value)" [value]="expression.curveExpression" aria-label="Recipient's
+          username"
+              aria-describedby="basic-addon2" autocomplete="off" required [readonly]="showEdit" AutoSizeInput [minWidth]="350"
+              [maxWidth]="900" /> -->
+            <!-- delFromArray(box.value) -->
+            <span *ngIf="!disableFormulaModification">
+            <i *ngIf="!showEdit" (click)="setCurveDetails()" class="inMiddle material-icons cursor">
+              done
+            </i>
+            <img (click)="editSaveCurve()" *ngIf="showEdit" class="inMiddle cursor edit-icon"
+              src=".\assets\icons\Modify.png" />
+            </span>
+            <!-- <i *ngIf="showEdit" (click)="editSaveCurve()" class="material-icons cursor edit-icon"> -->
+            <!-- edit -->
+            <!-- </i> -->
+
+            <br />
+            <div *ngIf="saveBox">
+              <div class="row">
+                <div class="form-group mr30">
+                  <input class="form-control w-200 mr15" type="text" #box1 (focus)="displayButton = true"
+                    (keyup)="addNewCurveName(box1.value)" placeholder="Enter Expression Name"
+                    [ngClass]="{ 'is-invalid': !saveCurve }" required />
+                  <div *ngIf="!saveCurve" class="invalid-feedback">
+                    <div *ngIf="!saveCurve" class="ml-3">
+                      Curve Name is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="savebutton">
+                  <button *ngIf="displayButton" class="btn-sm btn-primary cursor" (click)="onsubmitcurve()">
+                    Save Expression
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="!showEdit">
+              <div class="custom-dropdown" [style.display]="displayDropdown ? 'block' : 'none'" *ngIf="curveBaseData">
+                <!-- <div  class="d-flex flex-row bd-highlight mb-3"> -->
+                    <div class="card-deck m-0 silverbg">
+                   <div class="card flex-1 silverbg mt-10" >
+                      
+                <div class="card m-0 p-0 borderagg">
+               <div class="card-body">
+                  <h5 class="card-title mtr-5" >Aggregate Function</h5>  
+               <hr class="m-0" />
+                <div (click)="AddAggregate('AVG')" class="cursor f-s">Average</div>
+                <div (click)="AddAggregate('MIN')"  class="cursor f-s">Minimum</div>
+                <div (click)="AddAggregate('MAX')"  class="cursor f-s">Maximum</div>
+                </div>
+               
+                  </div>
+                  
+             
+              <div *ngIf="componentPricingEnabled && componentOfProduct.length > 0" class="bd-highlight card component">
+                  <h5 class="card-title mb-0">Components</h5>
+                  <hr class="m-0" />
+              <div class="card-body p-0">
+             
+              
+              <div *ngFor="let item of (componentOfProduct);  let i = index" (click)="AddComponent(item.Component)"  class="cursor f-s">{{item.ComponentWithComposition}}</div>
+              </div> 
+              </div>
+            </div>
+            
+          <!-- </div> -->
+               <div class="card flex-2">
+                <h5 class="card-title">Curves</h5>
+                <hr class="m-0" />
+                <div>
+                <div *ngFor="
+                    let item of (curveData | filter: get());
+                    let i = index
+                  " [class.highlighted]="i === selectedRow">
+                  <div *ngIf="i <= 5" (click)="
+                      addcurveexp(
+                        item.curveExpression,
+                        item.curveExpressionArray,
+                        item.curveName,
+                        item.curveType,
+                        item.includedCurve
+                      )
+                    " class="fullCurve">
+                    <div class="curveName">{{ item.curveName }}</div>
+                    <div class="curveExpr">{{ item.curveExpression }}</div>
+                  </div>
+                </div>
+              </div>
+                <app-modal (valueChange)="setInputCurve($event)" [curveBaseDataModal]="curveData"></app-modal>
+              </div>
+            </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        </form>
+    </span>
+    <!-- {{expression |json}} -->
+    
+    <form *ngIf="curveSelected && mdmData" form="curveGroup">
+      <!-- {{curveGroup.value | json }}
+      {{holiday.value|json}} -->
+
+      <!-- {{newCreate | json}} -->
+
+      <label for="form_name">Curve Details</label>
+      <div *ngIf="expression.includedCurve">
+        <div *ngFor="let curveItems of expression.includedCurve; index as i">
+          <!-- {{expression.includedCurve}} -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-default well">
+                <div class="panel-body">
+                  <div class="row mx-md-n5 padi">
+                  <div [ngStyle]="{ color: color[i] }" class="col-11 px-md-8 fontW maxwidth">
+                    {{ curveItems }}
+                  </div>
+                    <!-- <div class="col-1 px-md-2" [formGroup]="getFormGroup(i)">
+                    <input type="checkbox"  [formControl]="getFormControl(i, 'exposureEnabled')"  class="form-check-input" id="exampleCheck12" />
+                    <label class="form-check-label mb10" for="exampleCheck1">
+                      {{
+                        curveDetailsMeta.fields.exposureEnabled[
+                          curveDetailsMeta.fields.exposureEnabled.labelKey
+                        ]
+                      }}
+                    </label>
+                  </div> -->
+                </div>
+                
+                  <div class="row" [formGroup]="getFormGroup(i)">
+                    <div class="col-lg-2 nopadding pdl15">
+                      <div class="form-group">
+                        <label for="form_name">{{
+                            curveDetailsMeta.fields.price_point[
+                              curveDetailsMeta.fields.price_point.labelKey
+                            ]
+                          }}
+                        </label>
+                        <select class="form-control newinputstyle mw200" id="sel1"
+                          [formControl]="getFormControl(i, 'pricePoint')"  disabled>
+                          <option *ngFor="
+                              let items of (pricePointArray[curveItems] | orderBy: order)
+                            " [ngValue]="items.value">{{ items.value }}</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                   
+                    <div class="col-lg-2 nopadding">
+                      <div class="form-group">
+                        <label for="form_lastname">{{
+                          curveDetailsMeta.fields.price_type[
+                            curveDetailsMeta.fields.price_type.labelKey
+                          ]
+                        }}</label>
+                        <select class="form-control newinputstyle mw200" id="sel1"
+                          [formControl]="getFormControl(i, 'priceType')">
+                          <option *ngFor="
+                              let items of (mdmData.priceType | orderBy: order)
+                            " [ngValue]="items.value">{{ items.value }}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 nopadding">
+                      <div class="form-group">
+                        <label for="form_name">{{
+                          curveDetailsMeta.fields.price_quote_rule[
+                            curveDetailsMeta.fields.price_quote_rule.labelKey
+                          ]
+                        }}</label>
+                        <select class="form-control newinputstyle PriceQuoteRule mw200" id="PriceQuoteRuleRow1"
+                          row="row1" [formControl]="getFormControl(i, 'priceQuoteRule')" (change)="
+                            OnChangePriceQuoteRule($event.target.value, i)
+                          ">
+                          <option *ngFor="
+                              let items of (conditionalpriceQuoteRule[i]
+                                | orderBy: order)
+                            " [ngValue]="items.value">{{ items.value }}</option>
+                        </select>
+                      </div>
+                    </div>
+                   
+                    <div class="col-lg-2 nopadding" *ngIf="getFormControl(i, 'priceQuoteRule').value ==
+                        'Delivery Period Average' && getFormControl(i, 'pricePoint').value !=
+                        'Forward'
+                      ">
+                      <div class="form-group">
+                        <label for="form_name">{{
+                          curveDetailsMeta.fields.price_period[
+                            curveDetailsMeta.fields.price_period.labelKey
+                          ]
+                        }}</label>
+                        <select class="form-control newinputstyle PriceQuoteRule mw200"
+                          [formControl]="getFormControl(i, 'period')" id="PriceQuoteRuleRow1" row="row1">
+                          <option *ngFor="
+                              let items of (mdmData.period | orderBy: order)
+                            " [ngValue]="items.value">{{ items.value }}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-2 nopadding" *ngIf="
+                        getFormControl(i, 'priceQuoteRule').value ==
+                        'Custom Period Average'
+                      ">
+                      <label for="dateOfDelivery">{{
+                        curveDetailsMeta.fields.price_period[
+                          curveDetailsMeta.fields.price_period.labelKey
+                        ]
+                      }}</label>
+                      <div class="datePeriod fle">
+                        <div class="formGroup fl1">
+                          <my-date-picker class="mydate-picker is-invalid two-field" type="date"
+                            [formControl]="getFormControl(i, 'startDate')" (dateChanged)="onDateChanged($event)"
+                            [options]="deliveryFromDateOptions"></my-date-picker>
+                        </div>
+                        <span class="date-space"> - </span>
+                        <div class="formGroup fl1">
+                          <my-date-picker class="mydate-picker two-field" type="date"
+                            [formControl]="getFormControl(i, 'endDate')" [options]="deliveryToDateOptions">
+                          </my-date-picker>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 nopadding" *ngIf="getFormControl(i, 'pricePoint').value == 'Forward' &&  getFormControl(i, 'priceQuoteRule').value !=
+                        'Event Offset Based' &&  getFormControl(i, 'priceQuoteRule').value !=='Lookback Pricing' && getFormControl(i, 'priceQuoteRule').value !=='Custom Period Average'">
+                      <div class="form-group">
+                        <label for="form_name">{{
+                            curveDetailsMeta.fields.pricingPeriod[
+                              curveDetailsMeta.fields.pricingPeriod.labelKey
+                            ]
+                          }}
+                        </label>
+                  
+                        <div class="formGroup">
+                        <p-calendar class="mydate-picker two-field" (onSelect)="updateQuaotedValue(i)" [maxDate]="getmax(i)"  [inputStyleClass]="'inputSizeDForPricing'" [formControl]="getFormControl(i, 'pricingPeriod')" [disabled]="disableFormulaModification" view="month" dateFormat="mm-yy" [yearNavigator]="true" yearRange="2000:2030"></p-calendar></div>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 nopadding" *ngIf="getFormControl(i, 'pricePoint').value == 'Forward' &&  getFormControl(i, 'priceQuoteRule').value !=
+                        'Event Offset Based'&&  getFormControl(i, 'priceQuoteRule').value !=='Lookback Pricing'&& getFormControl(i, 'priceQuoteRule').value !=='Custom Period Average'" >
+                          <div class="form-group">
+                            <label for="form_name">{{
+                                curveDetailsMeta.fields.quoted_period[
+                                  curveDetailsMeta.fields.quoted_period.labelKey
+                                ]
+                              }}
+                            </label>
+                            <div class="formGroup">
+                            <p-calendar class="mydate-picker two-field"  [inputStyleClass]="'inputSizeDForPricing'" [disabled]="(selectedSettleDate || disableFormulaModification)"  [minDate]="getmin(i)"  [readonlyInput]="true" [formControl]="getFormControl(i, 'quotedPeriodDate')" view="month" dateFormat="mm-yy" [yearNavigator]="true" yearRange="2000:2030"></p-calendar>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-2 nopadding" *ngIf="
+                        getFormControl(i, 'priceQuoteRule').value ==
+                        'Event Offset Based'
+                      ">
+                      <div class="form-group">
+                        <label for="form_name">{{
+                          curveDetailsMeta.fields.event[
+                            curveDetailsMeta.fields.event.labelKey
+                          ]
+                        }}</label>
+                        <select class="form-control newinputstyle PriceQuoteRule mw200"
+                          [formControl]="getFormControl(i, 'event')" id="PriceQuoteRuleRow1" row="row1" [ngClass]="{
+                            'is-invalid':
+                              getFormControl(i, 'event').errors &&
+                              pricePreviewButton
+                          }" (change)="onChangeOffset($event.target.value, i)">
+                          <option *ngFor="
+                              let items of (mdmData.defineActualsEventType
+                                | orderBy: order)
+                            " [ngValue]="items.value">{{ items.value }}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 nopadding" *ngIf="
+                    (getFormControl(i, 'priceQuoteRule').value ==
+                    'Event Offset Based'  || getFormControl(i, 'priceQuoteRule').value ==
+                    'Lookback Pricing'  ||getFormControl(i, 'priceQuoteRule').value ==
+                    'Custom Period Average') && getFormControl(i, 'pricePoint').value == 'Forward'
+                  ">
+                      <div class="form-group">
+                        <label for="form_name">{{ 
+                            curveDetailsMeta.fields.quoted_period[
+                              curveDetailsMeta.fields.quoted_period.labelKey
+                            ]
+                          }}
+                        </label>
+                        <select class="form-control newinputstyle mw200" id="sel1"
+                          [formControl]="getFormControl(i, 'quotedPeriod')">
+                          <option *ngFor="
+                              let items of (mdmData.quotedPeriod
+                                | orderBy: order)
+                            " [ngValue]="items.value">{{ items.value }}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 nopadding" *ngIf="
+                    getFormControl(i, 'priceQuoteRule').value ==
+                    'Settlement Date'
+                  ">
+                  <div class="form-group">
+                    <label for="form_name">Offset</label>
+                    <div class="box">
+                      <select class="form-control newinputstyle PriceQuoteRule wd75 mw200" (change)="resetoffset(i)"
+                        [formControl]="getFormControl(i, 'offsetType')" id="PriceQuoteRuleRow1" row="row1"
+                        [ngClass]="{
+                          'is-invalid':
+                            getFormControl(i, 'offsetType').errors &&
+                            pricePreviewButton
+                        }">
+                        <option value="Day">Day</option>
+                        <option value="Month">Month</option>
+                        <option value="NA">NA</option>
+                        
+                      </select>
+                      <span *ngIf="getFormControl(i, 'offsetType').value==='Day'">
+                      <input type="text" (keydown)="validateLetter($event)"
+                        (keyup)="offsetChange(offsetChanges.value, i)" [formControl]="getFormControl(i, 'offset')"
+                        class="form-control createcontrol" [placeholder]="getPlaceholder(getFormControl(i, 'offsetType').value)" maxlength="7"
+                        [value]="offsetChange(offsetChanges.value, i)" class="wd115 newinputstyle form-control"
+                        [ngClass]="{
+                          'is-invalid':
+                            getFormControl(i, 'offset').errors &&
+                            pricePreviewButton
+                        }" #offsetChanges />
+                      </span>
+                      <span *ngIf="getFormControl(i, 'offsetType').value==='Month'">
+                        <input type="text" (keydown)="validateLetter($event)"
+                          (keyup)="offsetChange(offsetChanges.value, i)" [formControl]="getFormControl(i, 'offset')"
+                          class="form-control createcontrol" [placeholder]="getPlaceholder(getFormControl(i, 'offsetType').value)" maxlength="7"
+                          [value]="offsetChange(offsetChanges.value, i)" class="wd115 newinputstyle form-control"
+                          [ngClass]="{
+                            'is-invalid':
+                              getFormControl(i, 'offset').errors &&
+                              pricePreviewButton
+                          }" #offsetChanges />
+                        </span>
+                    </div>
+                  </div>
+                </div>
+                   
+                    <!-- <div class="col-lg-2 nopadding" *ngIf="
+                        getFormControl(i, 'priceQuoteRule').value ==
+                          'Event Offset Based' &&
+                        (getFormControl(i, 'event').value == 'Bill of Lading' ||
+                          getFormControl(i, 'event').value ==
+                            'Notice of Readiness')
+                      ">
+                      <div class="form-group">
+                        <label for="form_name">Offset</label>
+                        <div class="box">
+                          <select class="form-control newinputstyle PriceQuoteRule wd75 mw200"
+                            [formControl]="getFormControl(i, 'offsetType')" id="PriceQuoteRuleRow1" row="row1"
+                            [ngClass]="{
+                              'is-invalid':
+                                getFormControl(i, 'offsetType').errors &&
+                                pricePreviewButton
+                            }">
+                            <option *ngFor="
+                                let items of outputServiceOffset.offsetType
+                              " [ngValue]="items.value">{{ items.value }}</option>
+                          </select>
+                          <input type="text" (keydown)="validateLetter($event)"
+                            (keyup)="offsetChange(offsetChanges.value, i)" [formControl]="getFormControl(i, 'offset')"
+                            class="form-control createcontrol" placeholder="N-N-N" maxlength="5"
+                            [value]="offsetChange(offsetChanges.value, i)" class="wd115 newinputstyle form-control"
+                            [ngClass]="{
+                              'is-invalid':
+                                getFormControl(i, 'offset').errors &&
+                                pricePreviewButton
+                            }" #offsetChanges />
+                        </div>
+                      </div>
+                    </div> -->
+                    <div class="col-lg-2 nopadding" *ngIf="
+                        getFormControl(i, 'priceQuoteRule').value ==
+                        'Event Offset Based'
+                      ">
+                      <div class="form-group">
+                        <label for="form_name">Offset</label>
+                        <div class="box">
+                          <select class="form-control newinputstyle PriceQuoteRule wd75 mw200" (change)="resetoffset(i)"
+                            [formControl]="getFormControl(i, 'offsetType')" id="PriceQuoteRuleRow1" row="row1"
+                            [ngClass]="{
+                              'is-invalid':
+                                getFormControl(i, 'offsetType').errors &&
+                                pricePreviewButton
+                            }">
+                            <option value="Day">Day</option>
+                            <option value="Month">Month</option>
+                            <option value="Week">Week</option>
+                          </select>
+                          <input type="text" (keydown)="validateLetter($event)"
+                            (keyup)="offsetChange(offsetChanges.value, i)" [formControl]="getFormControl(i, 'offset')"
+                            class="form-control createcontrol" [placeholder]="getPlaceholder(getFormControl(i, 'offsetType').value)" [maxlength]="getLenth(getFormControl(i, 'offsetType').value)"
+                            [value]="offsetChange(offsetChanges.value, i)" class="wd115 newinputstyle form-control"
+                            [ngClass]="{
+                              'is-invalid':
+                                getFormControl(i, 'offset').errors &&
+                                pricePreviewButton
+                            }" #offsetChanges />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 nopadding" *ngIf="
+                    getFormControl(i, 'priceQuoteRule').value ==
+                    'Event Offset Based'&&  getFormControl(i, 'offsetType').value ==
+                    'Month'
+                  ">
+                  <div class="form-group">
+                    <label for="form_name">Month Definition</label>
+                    <div class="box">
+                      <select class="form-control newinputstyle PriceQuoteRule wd75 mw200" [formControl]="getFormControl(i, 'monthDefinition')"  row="row1" [ngClass]="{
+                          'is-invalid':
+                            getFormControl(i, 'offsetType').errors &&
+                            pricePreviewButton
+                        }">
+                        <option value="BOM">BOM</option>
+                        <option value="EOM">EOM</option>
+                        <option value="NA">NA</option>
+                      </select>
+                      <span *ngIf ="getFormControl(i, 'monthDefinition').value !='NA'">
+                      <!-- <label for="form_name">Days</label> -->
+                      <input type="number" max='29' min="-29" style="width: 95px !important;"  placeholder="Days"
+                         [formControl]="getFormControl(i, 'offsetDays')" class="form-control createcontrol" class="wd115 newinputstyle form-control"
+                        [ngClass]="{
+                          'is-invalid':
+                            getFormControl(i, 'offset').errors &&
+                            pricePreviewButton
+                        }" />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                    <!-- <div class="col-lg-2 nopadding" *ngIf="
+                        getFormControl(i, 'priceQuoteRule').value ==
+                          'Event Offset Based' &&
+                        getFormControl(i, 'event').value == 'Week of BL'
+                      ">
+                      <div class="form-group">
+                        <label for="form_name">Offset</label>
+                        <div class="box">
+                          <select class="form-control newinputstyle PriceQuoteRule wd75 mw200"
+                            [formControl]="getFormControl(i, 'offsetType')" [ngClass]="{
+                              'is-invalid':
+                                getFormControl(i, 'offsetType').errors &&
+                                pricePreviewButton
+                            }" id="PriceQuoteRuleRow1" row="row1">
+                            <option *ngFor="
+                                let items of outputServiceOffset.offsetType
+                              " [ngValue]="items.value">{{ items.value }}</option>
+                          </select>
+
+                          <select class="form-control newinputstyle PriceQuoteRule wd75 mw200"
+                            [formControl]="getFormControl(i, 'offset')" id="PriceQuoteRuleRow1" row="row1">
+                            <option *ngFor="
+                                let items of outputServiceOffset.offsetValue
+                              " [ngValue]="items.value">{{ items.value }}</option>
+                          </select> -->
+                    <!-- <input type="text" (keydown)="validateWeekDays($event)" (keyup)="weekChange(week.value,i)" [formControl]="getFormControl(i, 'offset')"
+                            class="form-control  createcontrol" placeholder="XXX-XXX" maxlength="7" [value]="weekChange(week.value,i)"
+                            class="wd115 newinputstyle form-control" #week /> -->
+                    <!-- </div>
+                      </div>
+                    </div> -->
+                    <div class="col-lg-2 nopadding" *ngIf="
+                        getFormControl(i, 'priceQuoteRule').value ==
+                        'Lookback Pricing'
+                      ">
+                      <div class="form-group">
+                        <label for="form_name ">Offset</label>
+                        <div class="box">
+                          <select  class="form-control newinputstyle PriceQuoteRule wd75 mw200"
+                            [formControl]="getFormControl(i, 'offsetType')" [ngClass]="{
+                              'is-invalid':
+                                getFormControl(i, 'offsetType').errors &&
+                                pricePreviewButton
+                            }" id="PriceQuoteRuleRow1" row="row1">
+                            <option *ngFor="
+                                let items of outputServiceOffset.offsetType
+                              " [ngValue]="items.value">{{ items.value }}</option>
+                          </select>
+                          <input type="text" (keydown)="validateLetter($event)"
+                            (keyup)="offsetChange(offsetChanges.value, i)" [formControl]="getFormControl(i, 'offset')"
+                            class="form-control  createcontrol" [value]="offsetChange(offsetChanges.value, i)"
+                            maxlength="8" placeholder="MM-MM-MM" [ngClass]="{
+                              'is-invalid':
+                                getFormControl(i, 'offset').errors &&
+                                pricePreviewButton
+                            }" class="wd115 newinputstyle form-control" #offsetChanges />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-2 nopadding" *ngIf="fxDifferent[i]">
+                      <div class="form-group">
+                        <label for="form_name">{{
+                            curveDetailsMeta.fields.fx[
+                              curveDetailsMeta.fields.fx.labelKey
+                            ]
+                          }}
+                          <span class="paddingLeft">{{ conversionPrice[i] }}</span>
+                        </label>
+                        <!-- <label for="form_name " class="paddingLeft">{{ conversionPrice[i] }}
+                        </label> -->
+                        <div class="boxed">
+                          <!-- (change)="callfxRate($event.target.value, i)" -->
+                          <select class="form-control newinputstyle w115" id="sel1"
+                            [formControl]="getFormControl(i, 'fxType')">
+                            <option *ngFor="
+                                let items of (mdmData.fx | orderBy: order)
+                              " [ngValue]="items.value">{{ items.value }}</option>
+                          </select>
+
+                          <input *ngIf="getFormControl(i, 'fxType').value == 'Fixed'" type="number" min="0"
+                            [formControl]="getFormControl(i, 'fxInput')" class="form-control createcontrol"
+                            placeholder="" class="wd115 form-control newinputstyle" />
+                            <select class="form-control newinputstyle" style="width: 140px;" *ngIf="getFormControl(i, 'fxType').value == 'Curve'" id="sel1"
+                            [formControl]="getFormControl(i, 'fxCurve')">
+                            <option *ngFor="
+                                let items of callfxRate('test',i)
+                              " [ngValue]="items">{{ items}}</option>
+                          </select>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 nopadding">
+                      <div class="form-group">
+                        <label for="form_name">{{
+                            curveDetailsMeta.fields.differential[
+                              curveDetailsMeta.fields.differential.labelKey
+                            ]
+                          }}
+                        </label>
+                        <div class="boxed">
+                          <input type="number" [formControl]="getFormControl(i, 'differential')"
+                            class="form-control newinputstyle w115" placeholder=""  />
+                            <div class=" newinputstyle" style="width: 93px !important;" id="sel1"
+                            [formControl]="getFormControl(i, 'differentialUnit')">
+                            {{differentialUnitArray[i]}}
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="col-lg-2 nopadding" *ngIf="fxDifferentqtyUnit[i]">
+                      <div class="form-group">
+                        <label for="form_name">{{
+                          conversionQtyUnit[i]
+                          }}
+                        </label>
+                        <div class="boxed">
+                          <input type="number" min="0" [formControl]="getFormControl(i, 'qtyUnitConversionFactor')"
+                            class="form-control createcontrol" placeholder="" class="wd50 form-control newinputstyle" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 nopadding">
+                      <div class="form-group">
+                        <label for="form_name">{{
+                            curveDetailsMeta.fields.indexPrecision[
+                              curveDetailsMeta.fields.indexPrecision.labelKey
+                            ]
+                          }}
+                        </label>
+                        <div class="boxed">
+                          <select class="form-control newinputstyle" id="sel1"
+                          [formControl]="getFormControl(i, 'indexPrecision')">
+                           <option *ngFor="let items of digits" [ngValue]="items">{{
+                            items
+                          }}</option>
+                          </select>
+
+                        </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row " style="margin-bottom: -15px;margin-right: -175px;" *ngIf="
+                  (getFormControl(i, 'priceQuoteRule').value ==
+                  'Delivery Period Average' || getFormControl(i, 'priceQuoteRule').value ==
+                  'Prompt Period Avg') && getFormControl(i, 'pricePoint').value !=
+                  'Daily'
+                " [formGroup]="getFormGroup(i)">
+                    <div class="col-7 "style=" max-width: 55.8%" ></div>
+                    <div class="col-2 maxContent">
+                      <label class="form-check-label mb10" for="exampleCheck1">
+                        Shipment on Actuals
+                      </label>
+                    </div>
+                    <div class="col-2 maxContent" >
+                    <input type="checkbox" (change)="callvalidation('isActualPricing',i)"  [formControl]="getFormControl(i, 'isActualPricing')"  class="form-check-input" id="exampleCheck11" />
+                    <label class="form-check-label mb10" for="exampleCheck1">
+                      {{
+                        curveDetailsMeta.fields.isActualPricing[
+                          curveDetailsMeta.fields.isActualPricing.labelKey
+                        ]
+                      }}
+                    </label>
+                  </div>
+                  <div class="col-2 maxContent" >
+                    <input type="checkbox"   (change)="callvalidation('isActualQuoted',i)" [formControl]="getFormControl(i, 'isActualQuoted')" class="form-check-input" id="exampleCheck5" />
+                    <label class="form-check-label mb10" for="exampleCheck13">
+                      {{
+                        curveDetailsMeta.fields.isActualQuoted[
+                          curveDetailsMeta.fields.isActualQuoted.labelKey
+                        ]
+                      }}
+                    </label></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <br />
+
+    <form [formGroup]="holiday">
+      <div *ngIf="curveSelected" class="form-check">
+
+        <!-- <div *ngIf="getEvent()">
+          <input type="checkbox" formControlName="triggerPriceEnabled" class="form-check-input" id="exampleCheck1" />
+          <label class="form-check-label mb10" for="exampleCheck1">
+            Trigger Pricing
+          </label>
+          <!-- <div *ngIf="holiday.value.triggerPriceEnabled">
+              <div class="formGroup marAlign-15">
+                <ng-container *ngFor="let opDischarge of triggerPricing.controls; index as i">
+                  <div class="row " [formGroup]="opDischarge">
+                    <div class="col-lg-2">
+                      <input type="datetime" formControlName="triggerDate" class="form-control mw200 newinputstyle addmore"
+                        [ngModel]="dateToday | date:'dd-MM-yyyy'" (ngModelChange)="dateToday " 
+                        readonly>
+                    </div>
+                    <div *ngIf="!fromPricing" class="col-lg-2">
+                      <input type="text" formControlName="quantity" class="form-control mw200 newinputstyle addmore"
+                        placeholder="{{quantityForTriggerPricing}} is left">
+                    </div>
+                    <div *ngIf="fromPricing" class="col-lg-2">
+                      <input type="text" formControlName="quantity" class="form-control mw200 newinputstyle addmore"
+                        placeholder="Quantity (MT)">
+                    </div>
+                    <div class="col-lg-2">
+                      <input type="text" formControlName="price" class="form-control mw200 newinputstyle addmore"
+                        placeholder="Price (USD/MT)">
+                    </div>
+                  </div>
+                  <div *ngIf="triggerPricingData">
+                    <div *ngFor="let trigger of triggerPricingData ;">
+                      <div class="row">
+                        <div class="col-lg-2">
+                          <input type="datetime" class="form-control mw200 newinputstyle addmore" value="{{trigger.triggerDate }}"
+                            readonly>
+                        </div>
+                        <div class="col-lg-2">
+                          <input type="text" class="form-control mw200 newinputstyle addmore" value="{{trigger.quantity}}"
+                            readonly>
+                        </div>
+                        <div class="col-lg-2">
+                          <input type="text" class="form-control mw200 newinputstyle addmore" value="{{trigger.price}}"
+                            readonly>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+                <!-- <div class="popup-link" (click)="addTriggerPricing()">Add more</div> -->
+
+          <!-- 
+              </div>
+            </div> -->
+        <!-- </div> -->
+        <span>
+          <input type="checkbox" formControlName="triggerValue" class="form-check-input"  id="additionalRule" />
+          <label class="form-check-label" for="additionalRule">Additional Details (Holiday Rule, Quality Adjustment,
+            Price
+            Differential )</label>
+        </span>
+      </div>
+    
+
+      <span>
+        <!-- {{holiday.value | json}} -->
+        <div *ngIf="holiday.value.triggerValue && curveSelected" class="triggercss maxed1000">
+          <div *ngIf="holiday.value.triggerValue" class="greybg">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="form_name">{{
+                    curveDetailsMeta.fields.holidayRule[
+                      curveDetailsMeta.fields.holidayRule.labelKey
+                    ]
+                  }}</label>
+                  <select title="{{ holiday.value.holidayRule }}" formControlName="holidayRule"
+                    class="form-control newinputstyle mw200 " id="sel1">
+                    <option *ngFor="let items of mdmData.holidayRule" [ngValue]="items.value">{{ items.value }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div *ngIf="holiday.value.triggerValue">
+    
+            </div> -->
+
+          <div *ngIf="holiday.value.triggerValue">
+            <div class="formGroup">
+              <label>{{
+                curveDetailsMeta.fields.priceDifferential[
+                  curveDetailsMeta.fields.priceDifferential.labelKey
+                ]
+              }}</label>
+
+              <ng-container *ngFor="let op1 of priceDifferential.controls; index as i">
+                <div class="row" [formGroup]="op1">
+                  <div class="col-md-3 mw23per">
+                    <!-- <input type="text" formControlName="differentialType" class="form-control mw200 newinputstyle addmore"> -->
+
+                    <select formControlName="differentialType" class="form-control newinputstyle mw200 addmore "
+                      id="sel1" >
+                      <option *ngFor="
+                          let items of (ArrayForPriceDifferential[i]
+                            | orderBy: order)
+                        " [ngValue]="items.value">{{ items.value }}</option>
+                    </select>
+                  </div>
+                  <div *ngIf="
+                      holiday.value.priceDifferential[i].differentialType ===
+                        'Premium' ||
+                      holiday.value.priceDifferential[i].differentialType ===
+                        'Discount'
+                    " class="col-lg-2 ">
+                    <input type="text" formControlName="differentialValue"
+                      class="form-control mw200 newinputstyle addmore" placeholder="Value" />
+                  </div>
+                  <div *ngIf="
+                      holiday.value.priceDifferential[i].differentialType ===
+                        'Premium' ||
+                      holiday.value.priceDifferential[i].differentialType ===
+                        'Discount'
+                    " class=" col-1 " style="margin-left: -14px !important;">
+                    <!-- <input type="text" formControlName="differentialUnit" class="form-control mw200 newinputstyle addmore"
+                        placeholder="Unit"> -->
+                        <div class=" newinputstyle" style="width: 93px !important;" id="sel1">
+                        {{currencyCont}}
+                    </div>
+                    <!-- <select formControlName="differentialUnit" class="form-control mw200 newinputstyle addmore"
+                      id="exampleFormControlSelect1">
+                      <option [value]="currencyContractUnit" >{{currencyContractUnit}} </option>
+                      
+                    </select> -->
+                  </div>
+                  <!-- <div *ngIf="
+                      holiday.value.priceDifferential[i].differentialType ===
+                      'S-Curve'
+                    " class=" col-lg-2 ">
+                    <input type="text" formControlName="diffLowerThreashold"
+                      class="form-control mw200 newinputstyle addmore" placeholder="Lower Threshold" />
+                  </div>
+                  <div *ngIf="
+                      holiday.value.priceDifferential[i].differentialType ===
+                      'S-Curve'
+                    " class=" col-lg-2 ">
+                    <input type="text" formControlName="diffUpperThreshold"
+                      class="form-control mw200 newinputstyle addmore" placeholder="Upper Threshold" />
+                  </div> -->
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </span>
+    </form>
+
+    <br />
+
+    <app-confirm-pricing-popup #confirm btn1="OK" (action)="aftersaveFormula()"></app-confirm-pricing-popup>
+
+    <!-- <ng-template #content11 let-modal>
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="modal.dismiss('Cross click')"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p *ngIf="!DuplicateFormulaName">Formula Saved!! &hellip;</p>
+          <p *ngIf="DuplicateFormulaName">Formula Already Exists!! &hellip;</p>
+        </div>
+        <div class="modal-footer">
+          <span *ngIf="fromPricing">
+            <a routerLink="/pricing/formula/view">
+              <button
+                type="button"
+                class="btn btn-light"
+                (click)="modal.close('Close click')"
+              >
+                OK
+              </button></a
+            >
+          </span>
+          <span *ngIf="!fromPricing">
+            <button
+              class="btn btn-lg btn-outline-primary"
+              (click)="formulaSavedForContract(modal)"
+            >
+              OK
+            </button>
+          </span>
+        </div>
+      </ng-template> -->
+  </div>
+  <app-confirm-pricing-popup #save btn1="OK"></app-confirm-pricing-popup>
+
+  <div style="border-top-style: groove;padding: 10px">
+    <button class="btn greenBtn" style="float: right;" type="submit" (click)="validateExpression(content11)"
+      [disabled]="!curveSelected">
+      <span *ngIf="fromPricing">SAVE FORMULA</span>
+      <span *ngIf="!fromPricing">USE FORMULA</span>
+    </button>
+    <sidepreview #sidepreview [contractDetails]="contractDetails" [globalproperties]="globalproperties" [itemNo]="itemNo" [curveSelected]="curveSelected"
+      [itemIndex]="itemIndex" [newCreateData]="createnewData" [disableFormulaModification]="disableFormulaModification" [conversionPrice] = "conversionPrice" [curveGroup]="curveGroup" [fromPricing]="fromPricing"
+      (pricePreviewButton)="pricePreviewButton = $event"  [passToPricingApi]="passToPricingApi"></sidepreview>
+    <div *ngIf="fromPricing">
+      <a routerLink="/pricing/formula/view"><button class="btn greyButton">CANCEL</button></a>
+    </div>
+    <div *ngIf="!fromPricing && !indexPricing && !DataForPricing">
+      <span>
+        <button class="btn greyButton" (click)="toggle()">CANCEL</button>
+      </span>
+    </div>
+  </div>
+</div>

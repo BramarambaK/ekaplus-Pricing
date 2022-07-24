@@ -1,0 +1,199 @@
+<span *ngIf="formulaDetails.triggerPriceEnabled">
+  <div class="card">
+    <div class="card-header cardHeader">
+      Fix Price - {{heading}}
+    </div>
+    <div class="card-body cardbodypadding">
+      <div class="row">
+        <div class="minWidth">
+          <span class="flex1">{{ metaData.fields.category.category }}:</span>
+          <span class="flex3">{{ formulaDetails.category }}</span>
+        </div>
+        <div class="minWidth">
+          <span class="flex1">
+            {{ metaData.fields.formulaName.formulaName }}:</span>
+          <span class="flex3">{{ formulaDetails.formulaName }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="minWidth">
+          <span class="flex1">{{
+              metaData.fields.contractCurrencyPrice.contractCurrencyPrice
+            }}:</span>
+          <span class="flex3">{{ priceUnit }}</span>
+        </div>
+        <div class="minWidth">
+          <span class="flex1">{{ metaData.fields.formulaExpression.formulaExpression }}:</span>
+          <span class="flex3">{{ formulaDetails.newFormulaExp }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="minWidth">
+          <span class="flex1">{{ metaData.fields.pricePrecision.pricePrecision }}:</span>
+          <span class="flex3">{{ formulaDetails.pricePrecision }}</span>
+        </div>
+      </div>
+
+
+
+      <form [formGroup]="triggerPriceForm">
+
+        <div class=" mrtop maxWidth ">
+
+
+          <span class="row">
+            <span>{{ metaData.fields.triggerPricing.triggerPricing }}</span>
+            <span class="px-2 font-weight-bold">Fixed Quantity : {{totalQty-left}}</span>
+            <span class="px-2 font-weight-bold">Unfixed Quantity : {{left}}</span>
+          </span>
+          <div class="card borderColorForTable">
+            <table class="table table-striped tablemargin ">
+              <tr class="">
+                <th class="bordertop paddingTh FirstRowBGColor">Date</th>
+                <th class="bordertop paddingTh FirstRowBGColor">
+                  Quantity ({{qtyUnit}})
+                </th>
+                <th class="bordertop paddingTh FirstRowBGColor">
+                  Price
+                </th>
+                <th class="bordertop paddingTh FirstRowBGColor">
+                  FX
+                </th>
+              </tr>
+              <tr class="FirstRowBGColor " *ngIf="left > 0">
+                <td class="paddingInput">
+                  <my-date-picker type="date" class="mydate-picker two-field" formControlName="triggerDate"
+                    [options]="myDatePickerOptions">
+                  </my-date-picker>
+                </td>
+                <td class="paddingInput">
+                  <input class="form-control width " [ngClass]="{ 'is-invalid': errLeft  }" formControlName="quantity"
+                    type="number" required />
+                </td>
+                <td class="paddingInput row ">
+                  <input class="form-control width wid " formControlName="price" type="number" />
+                  <select class="form-control width wid ml-1" formControlName="priceU">
+                    <option *ngFor="
+                                let items of mdmResponse.productPriceUnit
+                              " [ngValue]="items.value">{{ items.value }}</option>
+                  </select>
+                  <!-- <span class="">
+                  <img
+                    (click)="reset()"
+                    class=" mr5 cursor searchIcon paddingicons "
+                    src=".\assets\icons\Cancel.png"
+                  />
+                  <img
+                    (click)="addTriggerPrice()"
+                    class=" mr5 cursor searchIcon pd5 "
+                    src=".\assets\icons\Save.png"
+                  />
+                </span> -->
+                </td>
+                <td>
+                  <input class="form-control width " *ngIf="SameUnit" formControlName="fxrate" type="number" readonly />
+                  <input class="form-control width " *ngIf="!SameUnit" formControlName="fxrate" type="number" />
+                </td>
+
+              </tr>
+
+              <tr class="colour" *ngFor="let data of formulaDetails.triggerPricing; index as i">
+                <td>{{ data.triggerDate | date: 'dd-MM-yyyy' }}</td>
+                <td>{{ data.quantity }}</td>
+                <td>{{ data.price }}<span> {{data.priceU}} </span></td>
+                <td>{{ data.fxrate }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+      </form>
+
+      <div class="row mrtop">
+        <input type="checkbox" [formControl]="formulaDetailsShownEnabled" class="margin " />
+        <label class="form-check-label" for="additionalRule">Formula Details (Curve Details, Holiday Rule, Quality
+          Adjustment,Price Differential)</label>
+      </div>
+      <div *ngIf="formulaDetailsShownEnabled.value">
+        <div *ngFor="let curveItems of formulaDetails.curves; index as i">
+          <div class="marginForCurve">
+            <span [ngStyle]="{ color: color[i] }" class="fontW">
+              {{ curveItems.curveName }}
+            </span>
+            <div class="row">
+              <div class="minWidth">
+                <span class="flex1">{{ metaData.fields.price_point.price_point }}:</span>
+                <span class="flex3">{{ curveItems.pricePoint }}</span>
+              </div>
+              <div class="minWidth">
+                <span class="flex1">{{ metaData.fields.price_period.price_period }}:</span>
+                <span class="flex3">{{ curveItems.period }}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="minWidth">
+                <span class="flex1">{{ metaData.fields.price_type.price_type }}:</span>
+                <span class="flex3">{{ curveItems.priceType }}</span>
+              </div>
+              <div class="minWidth">
+                <span class="flex1">
+                  {{ metaData.fields.differential.differential }}:</span>
+                <span class="flex3">{{ curveItems.differential }}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="minWidth">
+                <span class="flex1">{{
+                      metaData.fields.price_quote_rule.price_quote_rule
+                    }}:</span>
+                <span class="flex3">{{ curveItems.priceQuoteRule }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="minWidth">
+          <span class="flexFornewrow">{{ metaData.fields.holidayRule.holidayRule }}:</span>
+          <span class="flex3">{{ formulaDetails.holidayRule }}</span>
+        </div>
+        <div class="minWidth">
+          <span class="flexFornewrow">Quality Adjustment:</span>
+          <span class="flex3">{{ formulaDetails.qualityAdjustment }}</span>
+        </div>
+        <div class="minWidth">
+          <span class="flexFornewrow"
+            *ngIf="metaData.fields">{{ metaData.fields.priceDifferential.priceDifferential }}:</span>
+          <div class="flex3">
+            <div *ngFor="
+                  let priceDifferentialItems of formulaDetails.priceDifferential;
+                  index as i
+                ">
+              <span
+                *ngIf="priceDifferentialItems.differentialType === 'Premium'">{{ priceDifferentialItems.differentialType }}
+                |
+                {{ priceDifferentialItems.differentialUnit }} |
+                {{ priceDifferentialItems.differentialValue }}</span>
+              <span *ngIf="priceDifferentialItems.differentialType === 'S-Curve'">
+                {{ priceDifferentialItems.differentialType }} |
+                {{ priceDifferentialItems.diffLowerThreashold }} |
+                {{ priceDifferentialItems.diffUpperThreshold }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="reset()">
+        Cancel
+      </button>
+      <button type="button" class="btn  btn-outline-primary float" (click)="addTriggerPrice()">
+        Save
+      </button>
+    </div>
+  </div>
+</span>
+<span *ngIf="!formulaDetails.triggerPriceEnabled">
+  Trigger pricing is not enabled For this Formula:
+  {{ formulaDetails.formulaName }}
+</span>
+<app-confirm-pricing-popup #save btn1="OK"></app-confirm-pricing-popup>

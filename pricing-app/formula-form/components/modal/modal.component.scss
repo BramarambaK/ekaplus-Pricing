@@ -1,0 +1,55 @@
+.selected {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+table tr.highlighted {
+  background-color: #9d9d9e !important;
+  color: #ffffff;
+}
+.pull-right {
+  float: right;
+}
+.mr5 {
+  margin: 50px;
+}
+
+.addCurve {
+  text-align: center;
+  color: dodgerblue;
+  border-top: 1px solid silver;
+  font-size: 12px;
+  padding: 10px;
+  cursor: pointer;
+}
+.searchContainer {
+  display: inline-flex;
+  flex: 1 1 300px;
+  position: relative;
+  border-radius: 0px !important;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.searchIcon {
+  padding: 0.5rem;
+}
+
+.searchBox {
+  border: 0;
+
+  flex: 1;
+}
+.new {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ui-paginator-right-content {
+  padding: 6px !important;
+}
+
+.cursor {
+  cursor: pointer;
+}

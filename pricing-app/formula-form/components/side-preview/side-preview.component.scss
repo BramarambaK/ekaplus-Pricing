@@ -1,0 +1,79 @@
+.modal-footer > :not(:first-child) {
+  margin-left: auto;
+}
+.greybutton {
+  background-color: transparent !important;
+  border: 1px solid black !important;
+  float: right;
+  margin-right: 10px;
+}
+.myCustomModalClass > .modal-dialog {
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 100%;
+
+  .modal-content {
+    height: 100%;
+    overflow-y: auto;
+  }
+}
+.final {
+  font-size: 12.5px;
+  font-weight: 300;
+}
+
+.dropdown-toggle::after {
+  float: right;
+  // margin-left: 9.255em !important;
+  // margin-top: 9px;
+  // flex: 1;
+}
+.modal-dialog1{
+  max-width: 600px;
+  margin: 1.75rem auto;
+}
+.pricevalue {
+  // margin-left: 15%;
+  flex: 1;
+  text-align: start;
+}
+.pricevalue1 {
+  // margin-left: 15%;
+  flex: 1;
+  text-align: end;
+}
+.width1 {
+  width: 100%;
+  background-color: white;
+  // display: flex;
+  border-style: solid !important;
+}
+// .pad1 {
+//   padding: 2px;
+// }
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin: 40%;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.text-align{
+  text-align: start;
+}
+.display{
+  display: inline-block;
+}

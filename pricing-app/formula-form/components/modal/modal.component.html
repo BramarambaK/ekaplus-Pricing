@@ -1,0 +1,130 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    Curve
+
+    <i class="material-icons pull-right" (click)="this.modalReference.close()">
+      close
+    </i>
+  </div>
+  <!-- (onPage)="paginate($event)" -->
+  <span>
+    <span></span>
+    <div class="searchContainer pull-right">
+      <input
+        type="text"
+        pInputText
+        class="searchBox"
+        placeholder="Search"
+        (input)="dt.filterGlobal($event.target.value, 'contains')"
+        style="width:auto"
+      />
+      <img class="cursor searchIcon" src=".\assets\icons\Search.png" />
+    </div>
+  </span>
+
+  <p-table
+    #dt
+    [columns]="header"
+    [value]="records"
+    [paginator]="true"
+    [rows]="10"
+    sortMode="multiple"
+    selectionMode="single"
+    [(selection)]="selected"
+    [(first)]="first"
+    (onPage)="paginate($event)"
+  >
+    <ng-template pTemplate="header" let-header>
+      <tr>
+        <th
+          *ngFor="let h of header"
+          [pSortableColumn]="tableService.isSort(h) ? h.field : null"
+        >
+          {{ tableService.displayHeader(h) }}
+          <p-sortIcon
+            [field]="h.field"
+            *ngIf="tableService.isSort(h)"
+          ></p-sortIcon>
+        </th>
+      </tr>
+      <tr>
+        <th *ngFor="let h of headerKeys">
+          <p-multiSelect
+            *ngIf="tableService.isFilter(h)"
+            [options]="tableService.filter_distinct(records, h.field)"
+            defaultLabel="{{ tableService.displayHeader(h) }}"
+            (onChange)="dt.filter($event.value, h.field, 'in')"
+          ></p-multiSelect>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-record
+      let-columns="header"
+      let-rowIndex="rowIndex"
+    >
+      <tr [pSelectableRow]="record" [pSelectableRowIndex]="rowIndex">
+        <td class="new" *ngFor="let h of header">{{ record[h.field] }}</td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="paginatorright">
+      Displaying {{ firstIndex }} - {{ lastindex }} of
+      {{ records.length }}
+    </ng-template>
+  </p-table>
+
+  <!-- <div> -->
+  <!-- <hr /> -->
+
+  <!-- <app-add-curve></app-add-curve> -->
+
+  <!-- <app-add-curve></app-add-curve> -->
+
+  <!-- <datatables [header]="filteredMeta" [data]="curveData"></datatables> -->
+  <!-- <table class="table table-hover">
+        <thead>
+          <tr>
+            <th *ngFor="let item of (curveheadings | slice: 0:2)"> {{ item[item.labelKey] }} </th>
+  
+            <th> <input [(ngModel)]="
+              searchText" class="pull-right" placeholder="Search Curve" />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="
+              let items of (curveData
+                
+                | slice: pageSize
+                | slice: 0:itemsPerPage
+                | filter: searchText);
+              let i = index
+            "
+            (click)="setClickedRow(i)" [class.highlighted]="i === selectedRow">
+            <td>{{ items.curveName }}</td>
+            <td>{{ items.curveExpression }}</td>
+            <td></td>
+          </tr>
+  
+  
+        </tbody>
+      </table>
+      <div>
+        <ngb-pagination [collectionSize]="curveData.length" #numPages [pageSize]="itemsPerPage" [(page)]="currentPage"
+          (pageChange)="onPageChange(currentPage)"></ngb-pagination>
+      </div> -->
+  <!-- </div> -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="toggle()">
+      Cancel
+    </button>
+
+    <button type="button" class="btn btn-success" (click)="onSelect()">
+      USE CURVE
+    </button>
+  </div>
+</ng-template>
+
+<div class="addCurve" (click)="open(content)">Show All</div>

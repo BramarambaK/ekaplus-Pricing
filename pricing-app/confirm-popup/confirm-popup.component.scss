@@ -1,0 +1,33 @@
+.modal-header {
+  padding: 10px;
+  border-radius: 0;
+  font-size: 16px;
+}
+
+.modal-body {
+  padding: 10px;
+  text-align: center;
+  min-height: 80px;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-top: 1px solid #c8ced3;
+  padding: 10px;
+}
+
+.select {
+  display: inline-block;
+  width: 150px;
+}
+
+.close {
+  outline: none;
+}
+
+.pr-6 {
+  padding-right: 60px;
+}

@@ -1,0 +1,86 @@
+{
+    "_id" : ObjectId("5c29b4c1d38534784f0e2c7e"),
+    "type" : "policy",
+    "name" : "PR",
+    "roles" : [ 
+        {
+            "roleId" : "129",
+            "grants" : [ 
+                {
+                    "target" : "Price_Request/*",
+                    "action" : "READ"
+                }, 
+                {
+                    "target" : "Price_Request/*",
+                    "action" : "READ"
+                }, 
+                {
+                    "target" : "Formula/*",
+                    "action" : "READ"
+                }, 
+                {
+                    "target" : "Formula/*",
+                    "action" : "CREATE"
+                }, 
+                {
+                    "target" : "Formula/*",
+                    "action" : "DELETE"
+                }, 
+                {
+                    "target" : "Curve/*",
+                    "action" : "READ"
+                }, 
+                {
+                    "target" : "/Physicals/contract/*",
+                    "action" : "READ"
+                }, 
+                {
+                    "target" : "contract/*",
+                    "action" : "CREATE"
+                }
+            ]
+        }, 
+        {
+            "roleId" : "1267",
+            "grants" : [ 
+                {
+                    "target" : "Price_Request/*",
+                    "action" : "CREATE"
+                }, 
+                {
+                    "target" : "Price_Request/*",
+                    "action" : "READ"
+                }, 
+                {
+                    "target" : "Price_Request/*",
+                    "action" : "DELETE"
+                }, 
+                {
+                    "target" : "Price_Request/*",
+                    "action" : "UPDATE"
+                }, 
+                {
+                    "target" : "priceType/*",
+                    "action" : "CREATE"
+                }, 
+                {
+                    "target" : "pricePoint/*",
+                    "action" : "CREATE"
+                }, 
+                {
+                    "target" : "priceQuoteRule/*",
+                    "action" : "CREATE"
+                }, 
+                {
+                    "target" : "holidayRule/*",
+                    "action" : "CREATE"
+                }, 
+                {
+                    "target" : "/Physicals/contract/9758218056",
+                    "action" : "READ"
+                }
+            ]
+        }
+    ],
+    "tenantID" : ""
+}

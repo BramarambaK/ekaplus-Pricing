@@ -1,0 +1,76 @@
+{
+   
+    "contract" : {
+        "contractId" : "",
+        "itemId" : "",
+        "priceType" : ""
+    },
+    "Type" : "Simple",
+    "category" : "M2M",
+    "formulaExpression" : "0.5*(ICE Brent Crude + Nymex WTI Crude)",
+    "appName" : "Pricing",
+    "objectName" : "Formula",
+    "curves" : [ 
+        {
+            "0" : {
+                "pricePoint" : "Spot",
+                "priceType" : "Ask Price",
+                "priceQuoteRule" : "Contract Period Average",
+                "period" : "Delivery Period",
+                "startDate" : "",
+                "endDate" : "",
+                "eventOffset" : "",
+                "offsetType" : "",
+                "offsetInput" : "",
+                "curveName" : "ICE Brent Crude"
+            },
+            "1" : {
+                "pricePoint" : "Spot",
+                "priceType" : "Ask Price",
+                "priceQuoteRule" : "Contract Period Average",
+                "period" : "Delivery Period",
+                "startDate" : "",
+                "endDate" : "",
+                "eventOffset" : "",
+                "offsetType" : "",
+                "offsetInput" : "",
+                "curveName" : "Nymex WTI Crude"
+            }
+        }
+    ],
+    "formulaName" : "andjknsjk",
+    "holidayRule" : "",
+    "userId" : "23"
+},
+{
+   
+    "contract" : {
+        "contractId" : "",
+        "itemId" : "",
+        "priceType" : ""
+    },
+    "Type" : "Simple",
+    "category" : "M2M",
+    "formulaExpression" : "ICE Brent Crude Futures + 10",
+    "appName" : "Pricing",
+    "objectName" : "Formula",
+    "curves" : [ 
+        {
+            "0" : {
+                "pricePoint" : "Spot",
+                "priceType" : "Settlement Price",
+                "priceQuoteRule" : "Contract Period Average",
+                "period" : "Delivery Period",
+                "startDate" : "",
+                "endDate" : "",
+                "eventOffset" : "",
+                "offsetType" : "",
+                "offsetInput" : "",
+                "curveName" : "ICE Brent Crude Futures"
+            }
+        }
+    ],
+    "formulaName" : "test2 ",
+    "holidayRule" : "",
+    "userId" : "23"
+}

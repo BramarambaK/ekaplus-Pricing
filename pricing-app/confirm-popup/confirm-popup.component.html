@@ -1,0 +1,44 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <div class="modal-title" id="modal-basic-title">{{ title }}</div>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ body }}
+  </div>
+  <div class="modal-footer">
+    <span>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="takeAction(btn1, modal)"
+      >
+        CANCEL
+      </button>
+    </span>
+    <span>
+      <button
+        type="button"
+        *ngIf="btn2"
+        class="btn btn-outline-dark"
+        (click)="takeAction(btn2, modal)"
+      >
+        {{ btn2 }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary ml-2"
+        (click)="takeAction(btn1, modal)"
+      >
+        {{ btn1 }}
+      </button>
+    </span>
+  </div>
+</ng-template>

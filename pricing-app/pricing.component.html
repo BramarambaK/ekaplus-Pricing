@@ -1,0 +1,11 @@
+<span [ngClass]="{ main: fromContractPopup === false }">
+  <!-- <app-title-bar></app-title-bar> -->
+  <span class="" [ngClass]="{ 'container-fluid': fromContractPopup === false }">
+    <app-formula-form [fromPricing]="fromPricing" [valuation]="valuation" [indexPricing]="indexPricing"
+      class="container" *ngIf="currentComponent === 'formulaForm'" [formulaId]="formulaId" [contractDetails]="contractDetails"
+      [fromContractPopup]="fromContractPopup" [editFormulaId]="editFormulaId" [DataForPricing]="DataForPricing"
+      [itemId]="itemId" [itemIndex]="itemIndex" [mdmPriceUnit]="mdmPriceUnit" [disableFormulaModification]="disableFormulaModification" [fromViewContractPage]="fromViewContractPage"></app-formula-form>
+
+    <app-formula-list [fromPricing]="fromPricing" *ngIf="currentComponent === 'listing'"></app-formula-list>
+  </span>
+</span>
